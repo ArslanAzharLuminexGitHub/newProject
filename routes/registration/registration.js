@@ -55,8 +55,8 @@ Router.route("/forgetpass").post(registrationController.forgot_Pass);
 
 
 
-/**************** Route For upload **************************/
-Router.route("/upload").post(registrationController.upload);
+// /**************** Route For upload **************************/
+// Router.route("/upload").post(registrationController.upload);
 
 
 

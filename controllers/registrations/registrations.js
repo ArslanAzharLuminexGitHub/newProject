@@ -233,16 +233,12 @@ const forgot_Pass = async (req, res) => {
     }
 };
 
-const upload = async (req, res) => {
-    try {
-        const { fullName, uploads } = req.body;
-        console.log("Fullname:" + fullName + " " + "uploads: " + uploads);
-    } catch (error) {
-        return res.status(500).json({ "alert from upload": `${error}` });
-    }
-}
 
 
+
+
+
+/**************** SignUp_Authenication_Email **************************/
 const signUpAuthenicationEmail = async (req, res) => {
     try {
         let userData = await instence.user.findOneAndUpdate({ email: process.env.SuccessSignUp }, { active: true });
@@ -255,6 +251,10 @@ const signUpAuthenicationEmail = async (req, res) => {
 
 
 
+
+
+
+/**************** User_UpDate_Profile **************************/
 const updateProfile = async (req, res) => {
     try {
         console.log(req);
@@ -286,8 +286,49 @@ module.exports = {
     fun,
     forgot_Pass_link,
     forgot_Pass,
-    upload,
+    
     signUpAuthenicationEmail,
     updateProfile
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const upload = async (req, res) => {
+//     try {
+//         const { fullName, uploads } = req.body;
+//         console.log("Fullname:" + fullName + " " + "uploads: " + uploads);
+//     } catch (error) {
+//         return res.status(500).json({ "alert from upload": `${error}` });
+//     }
+// }
