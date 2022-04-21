@@ -6,7 +6,7 @@ const encrypt = require("../utility/bcrypt").encrypt;
 
 
 /************ MAILING_Function ****************/
-const email = async (req,res,HTML,subject)=>{
+const email = async (req,res,HTML,subject,message)=>{
     let nodemailer = require("nodemailer");
     let sender = process.env.app_email;
     let pass = process.env.app_pass;
@@ -55,7 +55,8 @@ const email = async (req,res,HTML,subject)=>{
                         console.log(error)
                     }
                     else {
-                        console.log(`Email sent:${info.response}`);
+                        console.log(info);
+                        return res.status(200).json({"Message":message});
                     }
                 });
 

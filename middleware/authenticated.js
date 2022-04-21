@@ -1,3 +1,5 @@
+const instence = require("../utility/instence");
+
 const authenticated_user = async (req,res,next)=>{
     let header = req.headers["authorization"];
     let token = header && header.split(" ")[1];
@@ -9,11 +11,11 @@ const authenticated_user = async (req,res,next)=>{
             
             if(err){return res.status(500).json({ "ERROR AUTH TOKEN": err });}
             else{
-                let userSchema = require("../models/userSchema");
-                let tokenSchema = require("../models/tokenSchema");
-                console.log(user);
-                let data = await userSchema.findOne({email:user.email});
-                let tokenData = await tokenSchema.findOne({email:user.email});
+            
+                console.log("From Token: "+user.email);
+
+                let data = await instence.user.findOne({email:user.email});
+                let tokenData = await instence.token.findOne({email:user.email});
                 if(tokenData){
                     if (data.active === true && tokenData) {
                         console.log("auth: "+data.active);

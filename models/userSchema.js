@@ -22,6 +22,7 @@ const dataBase = new Schema({
         type: String,
         minlength: 7,
         maxlength: 255,
+        unique:true,
         required: true
     },
     DOB: {
@@ -30,6 +31,10 @@ const dataBase = new Schema({
     },
     gender: {
         type: String,
+        enum: { 
+            values: ['male', 'female','MALE','FEMALE'], 
+            message: '{VALUE} is not supported' 
+        },
         required: true
     },
     address: {
@@ -63,6 +68,7 @@ const dataBase = new Schema({
     },
     active:{
         type: Boolean,
+        default:false,
         required: true,
     }
 

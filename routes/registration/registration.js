@@ -61,7 +61,7 @@ Router.route("/upload").post(registrationController.upload);
 
 
 /**************** Route For signUpAuthenicationEmail **************************/
-Router.route("/signupauthenication").post(registrationController.signUpAuthenicationEmail);
+Router.route("/signupauthentication").post(registrationController.signUpAuthenicationEmail);
 
 
 
