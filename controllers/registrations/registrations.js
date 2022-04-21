@@ -209,7 +209,7 @@ const forgot_Pass_link = async (req, res) => {
         //     mail(req, res, HTML, subject = "RESET PASSWORD",message = process.env.EMAIL_SENT_MESSAGE_RESET);   
         // }
         else if(foundTheUser === null){
-            return res.status(200).json({ "User is Not Registered": `Please Register you Account First` });
+            return res.status(404).json({ "User is Not Registered": `Please Register you Account First` });
         }
        
 
@@ -249,7 +249,7 @@ const signUpAuthenicationEmail = async (req, res) => {
         return res.status(200).json({ "signUpAuthenicationEmail": `${userData.email} is Activated Successfully...` });
 
     } catch (error) {
-        return res.status(500).json({ "alert from upload": `${error}` });
+        return res.status(500).json({ "ALERT From SignUp_Authenication_Email": error });
     }
 }
 
