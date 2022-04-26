@@ -7,10 +7,11 @@ const authenticated_user = async (req,res,next)=>{
     let header = req.headers["authorization"];
     let token = header && header.split(" ")[1];
     if (token) {
-        console.log("Token :"+ token);
+        
         let jwt = require("jsonwebtoken");
         
         jwt.verify(token,key,async (err,user)=>{
+            
             
             if(err){
                // return res.status(500).json({ "ERROR AUTH TOKEN": err });
@@ -22,7 +23,7 @@ const authenticated_user = async (req,res,next)=>{
             }
             else{
             
-                console.log("From Token: "+user.email);
+        
 
                 let data = await instence.user.findOne({email:user.email});
                 let tokenData = await instence.token.findOne({email:user.email});

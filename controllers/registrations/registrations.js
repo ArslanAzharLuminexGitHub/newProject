@@ -127,7 +127,7 @@ const login = async (req, res) => {
 
                 else if (userData.active === true) {
 
-                    const token = await jwt.sign({ email: userData.email }, key , { expiresIn: "1y" });
+                    const token = await jwt.sign({ email: userData.email }, key, { expiresIn: "1y" });
 
 
                     let createToken = await instence.token.create({
@@ -135,6 +135,10 @@ const login = async (req, res) => {
                         token: token
                     });
                     if (createToken) {
+
+
+                        console.log("Token :" + createToken);
+
                         //return res.status(201).json({ "ALERT": `Welcome To The Profile ${userData.fullName}` });
                         await response(req, res,
                             responses = userData,
@@ -255,8 +259,9 @@ const fun = async (req, res) => {
     try {
 
         //await instence.user.deleteMany();
+        //await instence.token.deleteMany();
         var path = require('path');
-        var filename = path.relative('/Users/Refsnes/demo_path.js','/Users/Refsnes/demo_path.js');
+        var filename = path.relative('/Users/Refsnes/demo_path.js', '/Users/Refsnes/demo_path.js');
         console.log(filename);
         await response(req, res, responses = filename, message = "fun Iworking", statusCode = 200);
 
@@ -290,7 +295,7 @@ const forgot_Pass_link = async (req, res) => {
         else if (foundTheUser === null) {
             //return res.status(404).json({ "User is Not Registered": `Please Register you Account First` });
             await response(req, res,
-                responses = `Please Register you Account First`,
+                responses = `Please provide correct Email`,
                 message = "FAILED",
                 statusCode = 404
             );
