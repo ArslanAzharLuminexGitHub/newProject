@@ -1,4 +1,7 @@
 const instence = require("../utility/instence");
+const response = require("../utility/response").RESPONSE;
+const key = process.env.key || "key"
+
 
 const authenticated_user = async (req,res,next)=>{
     let header = req.headers["authorization"];
@@ -7,9 +10,16 @@ const authenticated_user = async (req,res,next)=>{
         console.log("Token :"+ token);
         let jwt = require("jsonwebtoken");
         
-        jwt.verify(token,process.env.key,async (err,user)=>{
+        jwt.verify(token,key,async (err,user)=>{
             
-            if(err){return res.status(500).json({ "ERROR AUTH TOKEN": err });}
+            if(err){
+               // return res.status(500).json({ "ERROR AUTH TOKEN": err });
+                await response(req,res,
+                    responses = err,
+                    message = "ERROR AUTH TOKEN",
+                    statusCode = 500
+                    );
+            }
             else{
             
                 console.log("From Token: "+user.email);
@@ -23,11 +33,21 @@ const authenticated_user = async (req,res,next)=>{
                         next();
     
                     } else {
-                        return res.status(404).json({"ALERT From Token DataBase":"Un_Authorized User"});
+                       // return res.status(404).json({"ALERT From Token DataBase":"Un_Authorized User"});
+                        await response(req,res,
+                            responses = "Un_Authorized User",
+                            message = "ALERT From Token DataBase",
+                            statusCode = 404
+                            );
                     }
                 }
                 else{
-                    return res.status(404).json({"ALERT":"User Is Already LOGED_OUT"});
+                    //return res.status(404).json({"ALERT":"User Is Already LOGED_OUT"});
+                    await response(req,res,
+                        responses = "ALERT",
+                        message = "User Is Already LOGED_OUT",
+                        statusCode = 404
+                        );
 
                 }
                
@@ -38,7 +58,12 @@ const authenticated_user = async (req,res,next)=>{
         })
        
     } else {
-        return res.status(404).json({"ALERT From Authentication":"Un_Authorized User"});
+        //return res.status(404).json({"ALERT From Authentication":"Un_Authorized User"});
+        await response(req,res,
+            responses = "Un_Authorized User",
+            message = "ALERT From Authentication",
+            statusCode = 404
+            );
     }
    
 }
